@@ -3,6 +3,7 @@ import { Hanken_Grotesk, Instrument_Serif, JetBrains_Mono } from 'next/font/goog
 import './globals.css';
 
 import { siteConfig } from '@/constants/site-config';
+import { DesignSwitch } from '@/components/design-switch';
 import { withBasePath } from '@/lib/base-path';
 
 const hanken = Hanken_Grotesk({
@@ -77,7 +78,10 @@ export default function RootLayout({
       lang="en"
       className={`${hanken.variable} ${instrument.variable} ${jetbrains.variable}`}
     >
-      <body className="min-h-dvh">{children}</body>
+      <body className="min-h-dvh">
+        {children}
+        <DesignSwitch />
+      </body>
     </html>
   );
 }

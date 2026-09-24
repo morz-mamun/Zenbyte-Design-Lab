@@ -3,6 +3,7 @@ import { Anton, Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
 import { siteConfig } from '@/constants/site-config';
+import { DesignSwitch } from '@/components/design-switch';
 import { withBasePath } from '@/lib/base-path';
 import { THEME_BG, THEME_STORAGE_KEY } from '@/lib/theme';
 
@@ -96,7 +97,10 @@ export default function RootLayout({
           <style>{noscriptStyles}</style>
         </noscript>
       </head>
-      <body className="min-h-dvh">{children}</body>
+      <body className="min-h-dvh">
+        {children}
+        <DesignSwitch />
+      </body>
     </html>
   );
 }

@@ -23,8 +23,8 @@
 
 ## 4. In-design switch control
 
-- [ ] 4.1 Add `components/design-switch.tsx` to both apps: a fixed bottom-left pill with plain `<a>` links to `/` ("ZENBYTE"), `/main` and `/lenis`, the current design marked `aria-current="page"`, visible focus styles, and self-contained styling
-- [ ] 4.2 Render it in each app's root `app/layout.tsx` after `{children}`, and check that its z-index doesn't cover the lenis intro loader or custom cursor
+- [x] 4.1 Add `components/design-switch.tsx` to both apps: a fixed bottom-left pill with plain `<a>` links to `/` ("ZENBYTE"), `/main` and `/lenis`, the current design marked `aria-current="page"`, visible focus styles, and self-contained styling
+- [x] 4.2 Render it in each app's root `app/layout.tsx` after `{children}`, and check that its z-index doesn't cover the lenis intro loader or custom cursor
 
 ## 5. Switcher app
 
