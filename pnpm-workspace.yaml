@@ -1,0 +1,10 @@
+packages:
+  - apps/*
+
+allowBuilds:
+  msw: true
+  sharp: true
+  unrs-resolver: false
+ignoredBuiltDependencies:
+  - sharp
+  - unrs-resolver

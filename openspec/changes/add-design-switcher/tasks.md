@@ -1,8 +1,8 @@
 ## 1. Workspace setup
 
-- [ ] 1.1 Create root `package.json` (private, `packageManager` pnpm) with scripts `dev`, `build`, `start` and `lint` that run all `apps/*` in parallel via `pnpm -r --parallel`
-- [ ] 1.2 Create root `pnpm-workspace.yaml` (`packages: [apps/*]`), carrying over any `onlyBuiltDependencies` / settings from the source repo's `pnpm-workspace.yaml`
-- [ ] 1.3 Add root `.gitignore` (`node_modules`, `.next`, `.env*.local`, `*.tsbuildinfo`, `next-env.d.ts`)
+- [x] 1.1 Create root `package.json` (private, `packageManager` pnpm) with scripts `dev`, `build`, `start` and `lint` that run all `apps/*` in parallel via `pnpm -r --parallel`
+- [x] 1.2 Create root `pnpm-workspace.yaml` (`packages: [apps/*]`), carrying over any `onlyBuiltDependencies` / settings from the source repo's `pnpm-workspace.yaml`
+- [x] 1.3 Add root `.gitignore` (`node_modules`, `.next`, `.env*.local`, `*.tsbuildinfo`, `next-env.d.ts`)
 
 ## 2. Snapshot the designs
 
