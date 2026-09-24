@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
-// Served as a zone of the design lab: the switcher app proxies /lenis/** here.
-const basePath = "/lenis";
+// Served as a zone of the design lab: the switcher app proxies /motion/** here.
+const basePath = "/motion";
 
 const nextConfig: NextConfig = {
   basePath,

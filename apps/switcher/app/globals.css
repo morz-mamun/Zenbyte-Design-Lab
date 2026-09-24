@@ -7,14 +7,14 @@
   --color-line: #262628;
 
   /* Swatches borrowed from each design, used only on its preview card. */
-  --color-main-paper: #f3f0e8;
-  --color-main-ink: #14171a;
-  --color-main-body: #3b4148;
-  --color-main-line: #d5cfc0;
-  --color-main-accent: #e8502f;
-  --color-lenis-bg: #0a0a0a;
-  --color-lenis-line: #333333;
-  --color-lenis-accent: #ff4925;
+  --color-classic-paper: #f3f0e8;
+  --color-classic-ink: #14171a;
+  --color-classic-body: #3b4148;
+  --color-classic-line: #d5cfc0;
+  --color-classic-accent: #e8502f;
+  --color-motion-bg: #0a0a0a;
+  --color-motion-line: #333333;
+  --color-motion-accent: #ff4925;
 
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-instrument), ui-serif, Georgia, serif;

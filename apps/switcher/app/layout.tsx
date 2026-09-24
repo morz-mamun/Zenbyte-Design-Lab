@@ -25,8 +25,8 @@ const anton = Anton({
 });
 
 export const metadata: Metadata = {
-  title: 'Zenbyte Design Lab',
-  description: 'Compare the Zenbyte site designs: open the Main Design or the Lenis Design as its own site.',
+  title: 'ZENBYTE Design Lab',
+  description: 'One site, two design directions: open the Classic or the Motion design of ZENBYTE as its own site.',
   robots: { index: false, follow: false },
 };
 

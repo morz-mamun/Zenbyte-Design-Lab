@@ -1,25 +1,26 @@
 /**
  * Design lab switch: a small fixed pill that leaves this design for the lab
- * entry page or the other design. Not part of the source branch.
+ * entry page or the other design. A lab-only addition, not part of the design.
  *
  * Plain <a> tags on purpose: every target lives outside this zone's basePath,
  * so each click must be a full document load, never a client-side transition.
  * Styles are self-contained (scoped class names, no design tokens) so the
  * pill looks the same in both designs and both themes.
  *
- * z-index 55: above the header (40) and mobile menu panel (50), under the
- * skip link (60).
+ * z-index 45: under the fixed header (z-50, whose stacking context also holds
+ * the full-screen mobile menu), intro loader (90), cursor (100), skip link
+ * (110) and theme-drop overlay (9999); above page content.
  */
 
-const CURRENT = 'main';
+const CURRENT = 'motion';
 
 const designs = [
-  { id: 'main', label: 'Main', href: '/main' },
-  { id: 'lenis', label: 'Lenis', href: '/lenis' },
+  { id: 'classic', label: 'Classic', href: '/classic' },
+  { id: 'motion', label: 'Motion', href: '/motion' },
 ] as const;
 
 const css = `
-.zb-ds{position:fixed;left:12px;bottom:12px;z-index:55;display:flex;align-items:center;gap:2px;padding:4px;border-radius:999px;background:rgba(17,17,17,.88);border:1px solid rgba(255,255,255,.14);box-shadow:0 4px 18px rgba(0,0,0,.28);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:500 11px/1 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.zb-ds{position:fixed;left:12px;bottom:12px;z-index:45;display:flex;align-items:center;gap:2px;padding:4px;border-radius:999px;background:rgba(17,17,17,.88);border:1px solid rgba(255,255,255,.14);box-shadow:0 4px 18px rgba(0,0,0,.28);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:500 11px/1 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.06em;text-transform:uppercase}
 .zb-ds a{display:block;padding:7px 10px;border-radius:999px;color:rgba(255,255,255,.72);text-decoration:none;transition:background-color .15s,color .15s}
 .zb-ds a:hover{color:#fff;background:rgba(255,255,255,.1)}
 .zb-ds a:focus-visible{outline:2px solid #fff;outline-offset:2px}
@@ -34,7 +35,7 @@ export function DesignSwitch() {
     <nav aria-label="Design switcher" className="zb-ds">
       <style>{css}</style>
       {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- "/" is the switcher zone; a full load is required. */}
-      <a href="/" className="zb-ds-home" title="Back to Zenbyte Design Lab">
+      <a href="/" className="zb-ds-home" title="Back to ZENBYTE Design Lab">
         Zenbyte
       </a>
       <span aria-hidden="true" className="zb-ds-sep" />
@@ -43,7 +44,7 @@ export function DesignSwitch() {
           key={design.id}
           href={design.href}
           aria-current={design.id === CURRENT ? 'page' : undefined}
-          title={`${design.label} Design`}
+          title={`${design.label} design`}
         >
           {design.label}
         </a>

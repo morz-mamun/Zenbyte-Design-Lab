@@ -5,41 +5,38 @@
  */
 
 type Design = {
-  id: 'main' | 'lenis';
+  id: 'classic' | 'motion';
   name: string;
   href: string;
-  branch: string;
   summary: string;
 };
 
 const designs: Design[] = [
   {
-    id: 'main',
-    name: 'Main Design',
-    href: '/main',
-    branch: 'main',
-    summary: 'Editorial layout on warm paper, serif headlines, no scroll effects.',
+    id: 'classic',
+    name: 'Classic',
+    href: '/classic',
+    summary: 'Editorial layout on warm paper, serif headlines, calm and static.',
   },
   {
-    id: 'lenis',
-    name: 'Lenis Design',
-    href: '/lenis',
-    branch: 'lenis-template',
-    summary: 'Motion-led: Lenis smooth scroll, intro loader, custom cursor, dark and light themes.',
+    id: 'motion',
+    name: 'Motion',
+    href: '/motion',
+    summary: 'Motion-led: smooth scrolling, intro loader, custom cursor, dark and light themes.',
   },
 ];
 
-function MainPreview() {
+function ClassicPreview() {
   return (
-    <div className="flex h-full flex-col justify-between bg-main-paper p-6 text-main-ink sm:p-8">
-      <div className="flex items-center justify-between font-sans text-[11px] font-medium text-main-body">
-        <span className="font-serif text-xl text-main-ink">ZenByte</span>
-        <span className="rounded-full bg-main-accent px-3 py-1.5 text-white">Start a project</span>
+    <div className="flex h-full flex-col justify-between bg-classic-paper p-6 text-classic-ink sm:p-8">
+      <div className="flex items-center justify-between font-sans text-[11px] font-medium text-classic-body">
+        <span className="font-serif text-xl text-classic-ink">ZenByte</span>
+        <span className="rounded-full bg-classic-accent px-3 py-1.5 text-white">Start a project</span>
       </div>
       <p className="font-serif text-4xl leading-[0.95] tracking-tight sm:text-5xl">
         The demo works.
         <br />
-        The <em className="text-main-accent">deployment</em>
+        The <em className="text-classic-accent">deployment</em>
         <br />
         is where it breaks.
       </p>
@@ -47,15 +44,15 @@ function MainPreview() {
   );
 }
 
-function LenisPreview() {
+function MotionPreview() {
   return (
-    <div className="flex h-full flex-col justify-between bg-lenis-bg p-6 text-white sm:p-8">
+    <div className="flex h-full flex-col justify-between bg-motion-bg p-6 text-white sm:p-8">
       <div className="flex items-center justify-between font-sans text-[11px] font-medium tracking-wider uppercase">
         <span className="font-display text-xl tracking-normal">Zenbyte</span>
-        <span className="rounded-full bg-lenis-accent px-3 py-1.5 text-black">Start a project</span>
+        <span className="rounded-full bg-motion-accent px-3 py-1.5 text-black">Start a project</span>
       </div>
       <p className="font-display text-4xl leading-[0.92] uppercase sm:text-5xl">
-        The demo works. <span className="text-lenis-accent">Deployment</span> is where it breaks.
+        The demo works. <span className="text-motion-accent">Deployment</span> is where it breaks.
       </p>
     </div>
   );
@@ -69,9 +66,9 @@ function DesignCard({ design }: { design: Design }) {
     >
       <div
         aria-hidden="true"
-        className={`aspect-[16/10] border-b ${design.id === 'main' ? 'border-main-line' : 'border-lenis-line'}`}
+        className={`aspect-[16/10] border-b ${design.id === 'classic' ? 'border-classic-line' : 'border-motion-line'}`}
       >
-        {design.id === 'main' ? <MainPreview /> : <LenisPreview />}
+        {design.id === 'classic' ? <ClassicPreview /> : <MotionPreview />}
       </div>
       <div className="flex flex-1 flex-col gap-3 p-6 sm:p-7">
         <div className="flex items-center justify-between gap-4">
@@ -84,9 +81,7 @@ function DesignCard({ design }: { design: Design }) {
           </span>
         </div>
         <p className="text-[15px] leading-relaxed text-muted">{design.summary}</p>
-        <p className="mt-auto pt-2 font-mono text-xs text-muted">
-          branch <span className="text-fg">{design.branch}</span> · {design.href}
-        </p>
+        <p className="mt-auto pt-2 font-mono text-xs text-muted">{design.href}</p>
       </div>
     </a>
   );
@@ -99,7 +94,7 @@ export default function Home() {
         <p className="text-sm font-bold tracking-[0.28em]">ZENBYTE</p>
         <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Design Lab</h1>
         <p className="max-w-xl text-base leading-relaxed text-muted">
-          Two complete versions of the Zenbyte site. Each one opens as its own website. Use the switch in the
+          One site, two design directions. Each one opens as its own complete website. Use the switch in the
           bottom-left corner of either design to come back or jump to the other.
         </p>
       </header>
