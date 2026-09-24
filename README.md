@@ -7,7 +7,7 @@ One site, two design directions. The same ZENBYTE website, with the same pages a
 | Classic | `/classic` | Editorial layout on warm paper, serif headlines, calm and static | [`apps/classic`](apps/classic) |
 | Motion | `/motion` | Motion-led: smooth scrolling, intro loader, custom cursor, dark and light themes | [`apps/motion`](apps/motion) |
 
-The entry page at `/` ([`apps/switcher`](apps/switcher)) lets you pick one. Every design page has a small switch pill in the bottom-left corner that goes back to the lab or to the other design. Switching is always a full page load, so each design boots exactly like its own website.
+The landing page at `/` ([`apps/switcher`](apps/switcher)) explains the project: the idea, a side-by-side comparison, how it's built and how to explore. It has its own dark and light themes and smooth scrolling, and its designs section opens either one. Every design page has a small switch pill in the bottom-left corner that goes back to the lab or to the other design. Switching is always a full page load, so each design boots exactly like its own website.
 
 ## How it works
 
@@ -37,3 +37,11 @@ To point the switcher at design apps running elsewhere, set `CLASSIC_ZONE_URL` a
 ## Maintaining
 
 How to update a design from its source is covered in [MAINTAINING.md](MAINTAINING.md).
+
+The landing page reuses the Motion design's theme toggle and motion helpers as **copies**, not imports, so the apps stay independent. Each copied file in `apps/switcher` names its source in a header comment:
+
+- `lib/theme.ts`, `components/theme/*` from `apps/motion`. The lab stores its theme under its own key, `zb-lab-theme`, so it never changes Motion's theme.
+- `components/motion/*` from `apps/motion/components/motion`.
+- `public/sounds/water-drop.m4a` from `apps/motion/public/sounds`.
+
+When one of these changes in `apps/motion`, port the change by hand.

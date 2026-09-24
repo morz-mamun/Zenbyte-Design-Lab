@@ -12,9 +12,10 @@ const rowIds = compare.rows.map((row) => rowId(row.attribute));
 
 /**
  * Desktop: the attribute list stays pinned beside the rows; the row crossing
- * the reading line lights up in the list and the other rows dim. Mobile: a
- * plain stacked list. Nothing dims until a row is active, so the section
- * reads fully without JavaScript.
+ * the reading line lights up in the list, and the other rows recede: their
+ * decorative specimens fade and their panels lose color, while all text keeps
+ * full AA contrast. Mobile: a plain stacked list. Nothing recedes until a row
+ * is active, so the section reads fully without JavaScript.
  */
 export function Compare() {
   const active = useActiveSection(rowIds);
@@ -68,17 +69,22 @@ export function Compare() {
                 key={row.attribute}
                 id={id}
                 aria-labelledby={`${id}-title`}
-                className={cn(
-                  'flex flex-col gap-5 border-t border-line py-10 transition-opacity duration-700 first:border-t-0 first:pt-0 lg:min-h-[62vh] lg:justify-center lg:first:border-t lg:first:pt-10',
-                  dimmed && 'lg:opacity-35',
-                )}
+                className="flex flex-col gap-5 border-t border-line py-10 first:border-t-0 first:pt-0 lg:min-h-[62vh] lg:justify-center lg:first:border-t lg:first:pt-10"
               >
-                <h3 id={`${id}-title`} className="text-2xl font-semibold tracking-tight">
+                <h3
+                  id={`${id}-title`}
+                  className={cn('text-2xl font-semibold tracking-tight transition-colors duration-700', dimmed && 'lg:text-muted')}
+                >
                   {row.attribute}
                 </h3>
                 <Reveal distance={28} className="grid gap-4 sm:grid-cols-2">
-                  <div className="flex flex-col gap-6 rounded-2xl border border-classic-line bg-classic-paper p-6 text-classic-ink">
-                    <div aria-hidden="true" className="flex h-16 items-center">
+                  <div
+                    className={cn(
+                      'flex flex-col gap-6 rounded-2xl border border-classic-line bg-classic-paper p-6 text-classic-ink transition-[filter] duration-700',
+                      dimmed && 'lg:grayscale',
+                    )}
+                  >
+                    <div aria-hidden="true" className={cn('flex h-16 items-center transition-opacity duration-700', dimmed && 'lg:opacity-25')}>
                       <Specimen attribute={row.attribute} side="classic" />
                     </div>
                     <div className="flex flex-col gap-2">
@@ -86,8 +92,13 @@ export function Compare() {
                       <p className="leading-relaxed text-classic-body">{row.classic}</p>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-6 rounded-2xl border border-motion-line bg-motion-bg p-6 text-white">
-                    <div aria-hidden="true" className="flex h-16 items-center">
+                  <div
+                    className={cn(
+                      'flex flex-col gap-6 rounded-2xl border border-motion-line bg-motion-bg p-6 text-white transition-[filter] duration-700',
+                      dimmed && 'lg:grayscale',
+                    )}
+                  >
+                    <div aria-hidden="true" className={cn('flex h-16 items-center transition-opacity duration-700', dimmed && 'lg:opacity-25')}>
                       <Specimen attribute={row.attribute} side="motion" />
                     </div>
                     <div className="flex flex-col gap-2">
