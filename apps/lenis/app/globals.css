@@ -1,0 +1,530 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens. Visual direction: the "Nakula" template (Velox Themes) as
+   adapted in openspec/changes/nakula-showcase-redesign. Structure and copy
+   still follow the design canvas.
+   ------------------------------------------------------------------------ */
+@theme {
+  --color-bg: #0a0a0a;
+  --color-surface: #121212;
+  --color-card: #181818;
+  --color-fg: #ffffff;
+  --color-fg-2: #cacaca;
+  --color-muted: #8f8f8f;
+  /* Large text and decoration only: 4.4:1 on bg. */
+  --color-subtle: #777777;
+  --color-line: #333333;
+  --color-line-soft: #242424;
+  --color-accent: #ff4925;
+  --color-accent-hover: #ff6a4d;
+  --color-on-accent: #0a0a0a;
+  /* Small accent text; darker than the accent in the light theme for AA. */
+  --color-accent-text: #ff4925;
+  /* Second stripe of the image placeholder. */
+  --color-stripe: #161616;
+  /* What stacked cards fade toward as they recede. */
+  --color-dim: #000000;
+  --color-shadow: rgb(0 0 0 / 0.8);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-nakula: cubic-bezier(0.12, 0.23, 0.5, 1);
+
+  --animate-ring: ring 2.4s ease-out infinite;
+  --animate-marquee: marquee var(--marquee-duration, 30s) linear infinite;
+  --animate-grain: grain 1.2s steps(6) infinite;
+  --animate-twinkle: twinkle 2.6s ease-in-out infinite;
+
+  @keyframes ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    100% {
+      transform: scale(1.9);
+      opacity: 0;
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @keyframes diag-scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(420%); }
+  }
+
+  @keyframes beam-drop {
+    0% { transform: translateY(-100%); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(320%); opacity: 0; }
+  }
+
+  @keyframes issue-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 73, 37, 0.45); }
+    50% { box-shadow: 0 0 0 5px rgba(255, 73, 37, 0); }
+  }
+
+  @keyframes wire-flow {
+    to {
+      stroke-dashoffset: -24;
+    }
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.6); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes grain {
+    0% { transform: translate(0, 0); }
+    20% { transform: translate(-3%, 2%); }
+    40% { transform: translate(2%, -3%); }
+    60% { transform: translate(-2%, -1%); }
+    80% { transform: translate(3%, 3%); }
+    100% { transform: translate(0, 0); }
+  }
+}
+
+@theme inline {
+  --font-display: var(--font-anton), 'Impact', 'Arial Narrow', sans-serif;
+  --font-sans: var(--font-geist), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------------ */
+@layer base {
+  :root {
+    --header-h: 72px;
+    --gutter: 20px;
+    color-scheme: dark;
+
+    @media (width >= 48rem) {
+      --gutter: 32px;
+    }
+    @media (width >= 80rem) {
+      --header-h: 88px;
+      --gutter: 40px;
+    }
+  }
+
+  /* Light theme: same tokens, light values. Dark (above) is the default and
+     needs no attribute; lib/theme.ts toggles data-theme on <html>. */
+  :root[data-theme='light'] {
+    --color-bg: #f4f2ee;
+    --color-surface: #eae7e1;
+    --color-card: #fbfaf8;
+    --color-fg: #0a0a0a;
+    --color-fg-2: #2e2e2e;
+    --color-muted: #5c5c5c;
+    --color-subtle: #767676;
+    --color-line: #cdc8bf;
+    --color-line-soft: #dfdad1;
+    --color-accent-text: #c4301a;
+    --color-stripe: #e2ded6;
+    --color-dim: #f4f2ee;
+    --color-shadow: rgb(20 16 10 / 0.16);
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    background-color: var(--color-bg);
+  }
+
+  /* Lenis recommended base styles. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis:not(.lenis-autoToggle).lenis-stopped {
+    overflow: clip;
+  }
+  .lenis [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  [id] {
+    scroll-margin-top: calc(var(--header-h) + 16px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    /* Everything animated by the motion system renders in its final state. */
+    [data-reveal] {
+      opacity: 1 !important;
+      transform: none !important;
+      clip-path: none !important;
+      filter: none !important;
+    }
+  }
+
+  /* Failsafe: if the page never hydrates, reveal content after 3s. */
+  html.js:not(.motion-ready) [data-reveal] {
+    animation: reveal-failsafe 0.01s linear 3s forwards;
+  }
+
+  @keyframes reveal-failsafe {
+    to {
+      opacity: 1;
+      transform: none;
+      clip-path: none;
+      filter: none;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Layout
+   ------------------------------------------------------------------------ */
+@utility container-site {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility section-y {
+  padding-block: 72px;
+
+  @media (width >= 48rem) {
+    padding-block: 112px;
+  }
+  @media (width >= 80rem) {
+    padding-block: 160px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Components: typography roles and surfaces. Kept in the components layer so
+   any utility overrides them.
+   ------------------------------------------------------------------------ */
+@layer components {
+  /* Giant display type (home h1). "DEPLOYMENT" must fit 280px at 320px wide. */
+  .type-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(3.25rem, 10.4vw, 10.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  /* Inner page h1. */
+  .type-display-sm {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(3rem, 7.6vw, 8.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  .type-h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.75rem, 6.4vw, 6.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .type-h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2.25rem);
+    line-height: 1;
+    letter-spacing: -0.005em;
+    text-transform: uppercase;
+  }
+
+  .type-lead {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--color-fg-2);
+    text-wrap: pretty;
+
+    @media (width >= 48rem) {
+      font-size: 20px;
+      line-height: 1.5;
+    }
+  }
+
+  .type-body {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-muted);
+    text-wrap: pretty;
+
+    @media (width >= 48rem) {
+      font-size: 16px;
+    }
+  }
+
+  .type-mono {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--color-muted);
+
+    @media (width >= 48rem) {
+      font-size: 12px;
+    }
+  }
+
+  /* Parenthetical section label, e.g. "(APPROACH)". */
+  .label {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+
+    @media (width >= 48rem) {
+      font-size: 12px;
+    }
+  }
+
+  /* ---------------------------------------------------------------------------
+     Surfaces
+     ------------------------------------------------------------------------ */
+  .card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line-soft);
+    border-radius: 16px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-fg-2);
+    padding: 7px 10px;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+
+    @media (width >= 48rem) {
+      font-size: 11px;
+    }
+  }
+
+  /* Soft accent glow. A radial gradient instead of a blur filter: same look,
+     no expensive filter to repaint while the page scrolls. */
+  .glow {
+    background: radial-gradient(closest-side, rgb(255 73 37 / var(--glow, 0.12)), transparent);
+  }
+
+  .stripes-dark {
+    background-color: var(--color-surface);
+    background-image: repeating-linear-gradient(
+      135deg,
+      var(--color-surface) 0 10px,
+      var(--color-stripe) 10px 20px
+    );
+  }
+
+  /* Film grain overlay: place inside a `relative overflow-hidden` parent. */
+  .grain {
+    pointer-events: none;
+    position: absolute;
+    inset: -50%;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: var(--animate-grain);
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+
+  /* Intro loader: rendered on the server, shown only when the boot script
+     flags the first load of a session. */
+  .intro-loader {
+    display: none;
+  }
+  html.intro .intro-loader {
+    display: flex;
+  }
+  html.intro:not(.intro-out) body {
+    overflow: hidden;
+  }
+
+  /* Rolling label: two stacked copies inside a clipped line (see RollLabel). */
+  .roll {
+    display: inline-flex;
+    flex-direction: column;
+    height: 1.2em;
+    line-height: 1.2;
+    overflow: clip;
+  }
+  .roll > span {
+    display: block;
+    transition: transform 0.5s var(--ease-out-expo);
+  }
+  .group:hover .roll > span,
+  .group:focus-visible .roll > span {
+    transform: translateY(-100%);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .group:hover .roll > span,
+    .group:focus-visible .roll > span {
+      transform: none;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Theme transition (components/theme/theme-transition.ts): a drop falls from
+   the toggle, splashes, and the new theme ripples out from the impact point.
+   The overlay has its own view-transition name so it stays live above the
+   page snapshots. --drop-color is the incoming theme's background.
+   ------------------------------------------------------------------------ */
+.theme-drop-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  view-transition-name: theme-drop;
+}
+
+.theme-drop {
+  position: absolute;
+  top: 0;
+  width: 30px;
+  height: 42px;
+  filter: drop-shadow(0 3px 8px rgb(0 0 0 / 0.25));
+  will-change: transform;
+}
+.theme-drop path {
+  fill: var(--drop-color);
+}
+.theme-drop ellipse {
+  fill: #fff;
+  opacity: 0.35;
+}
+
+.theme-drop-bead {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--drop-color);
+  opacity: 0;
+  box-shadow:
+    inset 0 2px 2px rgb(255 255 255 / 0.6),
+    inset 0 -1px 2px rgb(0 0 0 / 0.35),
+    0 1px 2px rgb(0 0 0 / 0.25);
+}
+
+.theme-splash-drop {
+  position: absolute;
+  opacity: 0.95;
+}
+.theme-splash-drop i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--drop-color);
+  box-shadow:
+    inset 0 1px 1px rgb(255 255 255 / 0.65),
+    inset 0 -1px 1px rgb(0 0 0 / 0.35),
+    0 1px 2px rgb(0 0 0 / 0.3);
+}
+
+.theme-water {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Set on <html> by setTheme() in lib/theme.ts for the frame the theme flips,
+   on every page and switch path, so color transitions (links, buttons, cards,
+   the header) jump to the new colors instead of fading. */
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+}
+
+::view-transition {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: none;
+  }
+  ::view-transition-new(root) {
+    animation: theme-ripple-reveal 2.2s cubic-bezier(0.12, 0.72, 0.28, 1) both;
+  }
+  :root.theme-rippling::view-transition-new(root) {
+    filter: url(#theme-water-warp);
+  }
+  ::view-transition-old(theme-drop) {
+    display: none;
+  }
+  ::view-transition-new(theme-drop) {
+    animation: none;
+  }
+
+  @keyframes theme-ripple-reveal {
+    from {
+      clip-path: ellipse(0px 0px at var(--ripple-x, 50vw) var(--ripple-y, 40vh));
+    }
+    to {
+      clip-path: ellipse(var(--ripple-rx, 160vmax) var(--ripple-ry, 90vmax) at var(--ripple-x, 50vw) var(--ripple-y, 40vh));
+    }
+  }
+}

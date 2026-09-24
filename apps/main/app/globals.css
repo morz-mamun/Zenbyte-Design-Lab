@@ -1,0 +1,293 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens — source: design canvas "Forward-Deployed Engineering Company
+   Website" (see openspec/changes/redesign-site-fde/reference).
+   ------------------------------------------------------------------------ */
+@theme {
+  --color-paper: #f3f0e8;
+  --color-ink: #14171a;
+  --color-card: #fbfaf6;
+  --color-sand: #eae5d9;
+  --color-line: #d5cfc0;
+  --color-line-soft: #e3ded0;
+  --color-line-panel: #ddd7c9;
+  --color-grid: #e6e1d4;
+  --color-accent: #e8502f;
+  --color-accent-hover: #f0684a;
+  --color-accent-ink: #b93216;
+  --color-body: #3b4148;
+  --color-muted: #5a6068;
+  --color-on-dark: #c9cdd2;
+  --color-on-dark-muted: #a9aeb4;
+  --color-dark-line: #3a4149;
+  --color-dark-line-soft: #2e343b;
+  --color-field: #9a9a90;
+  --color-hover-soft: #e9e4d6;
+  --color-stripe-a: #e7e1d3;
+  --color-stripe-b: #eee9dc;
+
+  --animate-ring: ring 2.4s ease-out infinite;
+
+  @keyframes ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    100% {
+      transform: scale(1.9);
+      opacity: 0;
+    }
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-hanken), system-ui, sans-serif;
+  --font-serif: var(--font-instrument), Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------------ */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  .surface-dark :focus-visible {
+    outline-color: var(--color-accent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Layout
+   ------------------------------------------------------------------------ */
+@utility container-site {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 24px;
+
+  @media (width >= 48rem) {
+    padding-inline: 48px;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 64px;
+  }
+  @media (width >= 80rem) {
+    padding-inline: 120px;
+  }
+}
+
+@utility section-y {
+  padding-block: 48px;
+
+  @media (width >= 48rem) {
+    padding-block: 72px;
+  }
+  @media (width >= 80rem) {
+    padding-block: 100px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Components: typography roles and surfaces. Kept in the components layer so
+   any utility (e.g. text-paper on dark sections) overrides them.
+   ------------------------------------------------------------------------ */
+@layer components {
+  /* ---------------------------------------------------------------------------
+     Typography roles (mobile artboard → desktop artboard)
+     ------------------------------------------------------------------------ */
+  .type-display {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(2.75rem, 1.82rem + 3.81vw, 5.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+
+    @media (width >= 80rem) {
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  /* 76px h1 used by Industries, For vendors and Start a project */
+  .type-display-sm {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(2.625rem, 1.836rem + 3.238vw, 4.75rem);
+    line-height: 1.07;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+
+    @media (width >= 80rem) {
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  .type-h2 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(2.125rem, 1.614rem + 2.095vw, 3.5rem);
+    line-height: 1.08;
+    text-wrap: balance;
+
+    @media (width >= 80rem) {
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+    }
+  }
+
+  .type-h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 1.36rem + 0.571vw, 1.875rem);
+    line-height: 1.15;
+    text-wrap: balance;
+
+    @media (width >= 80rem) {
+      line-height: 1.1;
+    }
+  }
+
+  .type-lead {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--color-body);
+    text-wrap: pretty;
+
+    @media (width >= 48rem) {
+      font-size: 19px;
+    }
+  }
+
+  .type-body {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-body);
+    text-wrap: pretty;
+
+    @media (width >= 48rem) {
+      font-size: 16px;
+    }
+  }
+
+  .type-mono {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--color-muted);
+
+    @media (width >= 48rem) {
+      font-size: 12px;
+    }
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--color-accent-ink);
+
+    @media (width >= 48rem) {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+  }
+
+  /* ---------------------------------------------------------------------------
+     Surfaces
+     ------------------------------------------------------------------------ */
+  .card {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-line);
+    border-radius: 14px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+    padding: 6px 9px;
+    border: 1px solid var(--color-ink);
+    border-radius: 999px;
+
+    @media (width >= 48rem) {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      padding: 7px 10px;
+    }
+  }
+
+  .grid-paper {
+    background-color: var(--color-paper);
+    background-image:
+      linear-gradient(var(--color-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+    background-size: 32px 32px;
+
+    @media (width >= 48rem) {
+      background-size: 48px 48px;
+    }
+  }
+
+  .stripes {
+    background-image: repeating-linear-gradient(
+      135deg,
+      var(--color-stripe-a) 0 10px,
+      var(--color-stripe-b) 10px 20px
+    );
+  }
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

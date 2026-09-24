@@ -6,11 +6,11 @@
 
 ## 2. Snapshot the designs
 
-- [ ] 2.1 Export `main` into `apps/main` with `git -C /home/mamun/morz/zenbyte/Zenbyte archive main | tar -x -C apps/main`
-- [ ] 2.2 Export `lenis-template` into `apps/lenis` the same way
-- [ ] 2.3 In both apps, remove branch tooling: `.claude/`, `.cursor/`, `openspec/`, `AGENTS.md`, `CLAUDE.md`, `pnpm-workspace.yaml`, `pnpm-lock.yaml`
-- [ ] 2.4 Write `apps/<name>/SOURCE.md` recording source repo, branch and commit SHA (`git rev-parse <branch>`)
-- [ ] 2.5 Rename packages to `@zenbyte/main` and `@zenbyte/lenis`, and set their `dev`/`start` scripts to ports 3001 and 3002
+- [x] 2.1 Export `main` into `apps/main` with `git -C /home/mamun/morz/zenbyte/Zenbyte archive main | tar -x -C apps/main`
+- [x] 2.2 Export `lenis-template` into `apps/lenis` the same way
+- [x] 2.3 In both apps, remove branch tooling: `.claude/`, `.cursor/`, `openspec/`, `AGENTS.md`, `CLAUDE.md`, `pnpm-workspace.yaml`, `pnpm-lock.yaml`
+- [x] 2.4 Write `apps/<name>/SOURCE.md` recording source repo, branch and commit SHA (`git rev-parse <branch>`)
+- [x] 2.5 Rename packages to `@zenbyte/main` and `@zenbyte/lenis`, and set their `dev`/`start` scripts to ports 3001 and 3002
 
 ## 3. Make the design zones prefix-aware
 

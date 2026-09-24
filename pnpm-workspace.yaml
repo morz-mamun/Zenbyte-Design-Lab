@@ -8,3 +8,11 @@ allowBuilds:
 ignoredBuiltDependencies:
   - sharp
   - unrs-resolver
+
+# Pin to the versions locked on the source branches so each design renders
+# exactly as it did there (fresh resolution picked newer minors).
+overrides:
+  tailwindcss: 4.2.4
+  '@tailwindcss/postcss': 4.2.4
+  motion: 13.4.0
+  eslint: 9.39.4
