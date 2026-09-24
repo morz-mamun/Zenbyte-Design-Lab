@@ -1,6 +1,19 @@
 import type { NextConfig } from "next";
 
+// Served as a zone of the design lab: the switcher app proxies /main/** here.
+const basePath = "/main";
+
 const nextConfig: NextConfig = {
+  basePath,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
+  experimental: {
+    serverActions: {
+      // Server actions arrive through the switcher's rewrite proxy.
+      allowedOrigins: ["localhost:3000"],
+    },
+  },
   async redirects() {
     return [
       {

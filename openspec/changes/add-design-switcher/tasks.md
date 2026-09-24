@@ -14,12 +14,12 @@
 
 ## 3. Make the design zones prefix-aware
 
-- [ ] 3.1 In `apps/main/next.config.ts` add `basePath: "/main"`, `env.NEXT_PUBLIC_BASE_PATH`, and `experimental.serverActions.allowedOrigins: ["localhost:3000"]`, keeping the existing `/services` redirect
-- [ ] 3.2 Do the same in `apps/lenis/next.config.ts` with `/lenis`
-- [ ] 3.3 Add `lib/base-path.ts` (`withBasePath(path)`) to both apps
-- [ ] 3.4 Audit `app/`, `components/`, `content/`, `constants/` and `lib/` in both apps for bare absolute URLs not handled by `next/link` or `redirect` (grep `['"\`]/[a-z_]`), and list the findings
-- [ ] 3.5 In lenis, wrap public asset paths with `withBasePath`: `content/case-studies.ts` image `src`s (or at their render site) and `components/theme/drop-sound.ts` `SRC`
-- [ ] 3.6 Fix raw internal `<a href>` in both `components/layout/site-footer.tsx` files (switch to `next/link` or `withBasePath`), and apply any other audit findings. Leave `mailto:`, external and `#hash` links as they are
+- [x] 3.1 In `apps/main/next.config.ts` add `basePath: "/main"`, `env.NEXT_PUBLIC_BASE_PATH`, and `experimental.serverActions.allowedOrigins: ["localhost:3000"]`, keeping the existing `/services` redirect
+- [x] 3.2 Do the same in `apps/lenis/next.config.ts` with `/lenis`
+- [x] 3.3 Add `lib/base-path.ts` (`withBasePath(path)`) to both apps
+- [x] 3.4 Audit `app/`, `components/`, `content/`, `constants/` and `lib/` in both apps for bare absolute URLs not handled by `next/link` or `redirect` (grep `['"\`]/[a-z_]`), and list the findings
+- [x] 3.5 In lenis, wrap public asset paths with `withBasePath`: `content/case-studies.ts` image `src`s (or at their render site) and `components/theme/drop-sound.ts` `SRC`
+- [x] 3.6 Fix raw internal `<a href>` in both `components/layout/site-footer.tsx` files (switch to `next/link` or `withBasePath`), and apply any other audit findings. Leave `mailto:`, external and `#hash` links as they are
 
 ## 4. In-design switch control
 

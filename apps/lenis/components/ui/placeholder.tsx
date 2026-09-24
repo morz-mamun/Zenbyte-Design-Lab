@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import type { ImageSlot } from '@/content/types';
+import { withBasePath } from '@/lib/base-path';
 import { cn } from '@/lib/utils';
 
 type PlaceholderProps = {
@@ -21,7 +22,7 @@ export function Placeholder({ slot, className, sizes = '100vw', priority }: Plac
     return (
       <div className={cn('relative overflow-hidden', className)}>
         <Image
-          src={slot.src}
+          src={withBasePath(slot.src)}
           alt={slot.alt}
           fill
           sizes={sizes}

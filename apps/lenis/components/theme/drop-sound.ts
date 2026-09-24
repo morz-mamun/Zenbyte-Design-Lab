@@ -5,7 +5,9 @@
  * silent: the theme switch never depends on audio.
  */
 
-const SRC = '/sounds/water-drop.m4a';
+import { withBasePath } from '@/lib/base-path';
+
+const SRC = withBasePath('/sounds/water-drop.m4a');
 const GAIN = 0.6;
 
 let context: AudioContext | null = null;

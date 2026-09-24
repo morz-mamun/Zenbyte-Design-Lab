@@ -3,6 +3,7 @@ import { Hanken_Grotesk, Instrument_Serif, JetBrains_Mono } from 'next/font/goog
 import './globals.css';
 
 import { siteConfig } from '@/constants/site-config';
+import { withBasePath } from '@/lib/base-path';
 
 const hanken = Hanken_Grotesk({
   variable: '--font-hanken',
@@ -62,7 +63,7 @@ export const metadata: Metadata = {
     images: [siteConfig.ogImage],
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: withBasePath('/favicon.ico'),
   },
 };
 
