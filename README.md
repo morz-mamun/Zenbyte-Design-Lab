@@ -34,14 +34,3 @@ Other root scripts: `pnpm build`, `pnpm start` (production, after a build), `pnp
 
 To point the switcher at design apps running elsewhere, set `CLASSIC_ZONE_URL` and `MOTION_ZONE_URL` (defaults `http://localhost:3001` and `http://localhost:3002`) when building/starting `apps/switcher`.
 
-## Maintaining
-
-How to update a design from its source is covered in [MAINTAINING.md](MAINTAINING.md).
-
-The landing page reuses the Motion design's theme toggle and motion helpers as **copies**, not imports, so the apps stay independent. Each copied file in `apps/switcher` names its source in a header comment:
-
-- `lib/theme.ts`, `components/theme/*` from `apps/motion`. The lab stores its theme under its own key, `zb-lab-theme`, so it never changes Motion's theme.
-- `components/motion/*` from `apps/motion/components/motion`.
-- `public/sounds/water-drop.m4a` from `apps/motion/public/sounds`.
-
-When one of these changes in `apps/motion`, port the change by hand.
