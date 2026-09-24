@@ -28,10 +28,10 @@
 
 ## 5. Switcher app
 
-- [ ] 5.1 Scaffold `apps/switcher` (`@zenbyte/switcher`, port 3000) with Next 16.2.4, React 19.2.4, Tailwind 4, TypeScript and ESLint config matching the design apps
-- [ ] 5.2 Add `next.config.ts` rewrites for `/main`, `/main/:path*`, `/lenis` and `/lenis/:path*` to `MAIN_ZONE_URL` / `LENIS_ZONE_URL` (defaulting to localhost:3001 / 3002)
-- [ ] 5.3 Build `app/layout.tsx`, `app/globals.css` and `app/page.tsx`: the ZENBYTE wordmark and two large `<a>` cards "Main Design" → `/main` and "Lenis Design" → `/lenis`, each with a one-line description and a visible focus ring
-- [ ] 5.4 Add a README at the project root covering install, `pnpm dev`, using only `http://localhost:3000`, and how to re-sync a design from its branch using `SOURCE.md`
+- [x] 5.1 Scaffold `apps/switcher` (`@zenbyte/switcher`, port 3000) with Next 16.2.4, React 19.2.4, Tailwind 4, TypeScript and ESLint config matching the design apps
+- [x] 5.2 Add `next.config.ts` rewrites for `/main`, `/main/:path*`, `/lenis` and `/lenis/:path*` to `MAIN_ZONE_URL` / `LENIS_ZONE_URL` (defaulting to localhost:3001 / 3002)
+- [x] 5.3 Build `app/layout.tsx`, `app/globals.css` and `app/page.tsx`: the ZENBYTE wordmark and two large `<a>` cards "Main Design" → `/main` and "Lenis Design" → `/lenis`, each with a one-line description and a visible focus ring
+- [x] 5.4 Add a README at the project root covering install, `pnpm dev`, using only `http://localhost:3000`, and how to re-sync a design from its branch using `SOURCE.md`
 
 ## 6. Verify
 
