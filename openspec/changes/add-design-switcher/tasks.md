@@ -35,9 +35,9 @@
 
 ## 6. Verify
 
-- [ ] 6.1 `pnpm install` at the root, then `pnpm build` succeeds for all three apps and `pnpm lint` passes
-- [ ] 6.2 With `pnpm dev`, check that `/` shows the switcher and that each card does a full document load (DevTools Network shows a `document` request) to its design home
-- [ ] 6.3 Click through every route in `/main` and `/lenis` (home, blog + a post, case studies + a detail, for-vendors, how-we-work, industries, start-a-project, a 404, `/services` redirect) and confirm there are no 404ed assets or links escaping the prefix
-- [ ] 6.4 In lenis, confirm smooth scroll, the intro loader, the cursor, the theme toggle with its sound, and the case-study images. In main, confirm no lenis/motion chunks load
-- [ ] 6.5 Submit the start-a-project form via `localhost:3000/main/...` and `/lenis/...` and confirm the server action succeeds through the rewrite
-- [ ] 6.6 Set the light theme in lenis, switch to main, and confirm main is unaffected. Confirm the switch control works on each design's pages, including 404, and that browser back returns to `/`
+- [x] 6.1 `pnpm install` at the root, then `pnpm build` succeeds for all three apps and `pnpm lint` passes
+- [x] 6.2 With `pnpm dev`, check that `/` shows the switcher and that each card does a full document load (DevTools Network shows a `document` request) to its design home
+- [x] 6.3 Click through every route in `/main` and `/lenis` (home, blog + a post, case studies + a detail, for-vendors, how-we-work, industries, start-a-project, a 404, `/services` redirect) and confirm there are no 404ed assets or links escaping the prefix
+- [x] 6.4 In lenis, confirm smooth scroll, the intro loader, the cursor, the theme toggle with its sound, and the case-study images. In main, confirm no lenis/motion chunks load
+- [x] 6.5 Submit the start-a-project form via `localhost:3000/main/...` and `/lenis/...` and confirm the server action succeeds through the rewrite
+- [x] 6.6 Set the light theme in lenis, switch to main, and confirm main is unaffected. Confirm the switch control works on each design's pages, including 404, and that browser back returns to `/`
