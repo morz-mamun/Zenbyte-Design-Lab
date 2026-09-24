@@ -12,6 +12,11 @@ out/
 *.tsbuildinfo
 next-env.d.ts
 
+# local tooling (kept on disk, not published)
+openspec/
+.claude/
+.cursor/
+
 # misc
 .DS_Store
 *.pem
