@@ -34,3 +34,5 @@ Other root scripts: `pnpm build`, `pnpm start` (production, after a build), `pnp
 
 To point the switcher at design apps running elsewhere, set `CLASSIC_ZONE_URL` and `MOTION_ZONE_URL` (defaults `http://localhost:3001` and `http://localhost:3002`) when building/starting `apps/switcher`.
 
+The design apps accept server actions (the start-a-project form) only from the lab's host. When the lab runs somewhere other than `localhost:3000`, set `LAB_ORIGIN` on `apps/classic` and `apps/motion` to its host, without the protocol (e.g. `zenbyte-lab.vercel.app`; comma-separate several).
+
