@@ -119,6 +119,18 @@
   }
 }
 
+/* Vertical rhythm for the anchored sections. The padding lives in a
+   variable so the scroll margin below can land on the heading, not on the
+   empty padding above it. */
+@utility section-pad {
+  --section-pt: 5rem;
+  padding-block: var(--section-pt);
+
+  @media (width >= 40rem) {
+    --section-pt: 7rem;
+  }
+}
+
 @layer base {
   :root {
     /* Navbar height; anchors land below it. */
@@ -155,6 +167,10 @@
      with Lenis and with native scrolling alike. */
   [id] {
     scroll-margin-top: calc(var(--nav-h) + 16px);
+  }
+  /* Sections: skip their top padding so the eyebrow sits ~2.5rem below the navbar. */
+  section[id] {
+    scroll-margin-top: calc(var(--nav-h) + 3.25rem - var(--section-pt, 0px));
   }
 
   /* Lenis recommended base styles. */

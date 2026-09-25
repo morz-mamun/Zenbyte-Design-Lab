@@ -57,7 +57,7 @@ function DesignCard({ design }: { design: Design }) {
 
 export function Designs() {
   return (
-    <section id="designs" aria-labelledby="designs-title" className="border-t border-line py-24 sm:py-32">
+    <section id="designs" aria-labelledby="designs-title" className="section-pad border-t border-line">
       <div className="container-lab">
         <SectionHeading
           index={2}
@@ -66,7 +66,7 @@ export function Designs() {
           titleId="designs-title"
           intro={designsSection.intro}
         />
-        <RevealGroup as="ul" stagger={0.16} className="mt-14 grid gap-6 sm:mt-20 md:grid-cols-2 lg:gap-8">
+        <RevealGroup as="ul" stagger={0.16} className="mt-10 grid gap-6 sm:mt-12 md:grid-cols-2 lg:gap-8">
           {designs.map((design) => (
             <TiltCard key={design.id} className="rounded-[1.5rem]">
               <DesignCard design={design} />

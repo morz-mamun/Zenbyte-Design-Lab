@@ -1,7 +1,7 @@
 'use client';
 
 import { useMotionValueEvent, useScroll } from 'motion/react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { PageProgress } from '@/components/motion/scroll-progress';
 import { useSmoothScrollTo } from '@/components/motion/smooth-scroll';
@@ -20,8 +20,9 @@ const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-
  * Fixed navbar: transparent over the top of the hero, blurred once scrolled.
  * Past the hero it hides while scrolling down and returns on any upward
  * scroll; it never hides while keyboard focus is inside it, the menu is
- * open, or a scroll started from one of its links is still running. Section
- * links mark the section in view.
+ * open, or a jump started from any in-page link is still running (the
+ * anchors land assuming the navbar is showing). Section links mark the
+ * section in view.
  */
 export function SiteNav() {
   const { scrollY } = useScroll();
@@ -32,35 +33,47 @@ export function SiteNav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [focusWithin, setFocusWithin] = useState(false);
 
-  // Set while a jump started from the navbar is scrolling; cleared once the
-  // scroll has been still for a moment, so the navbar stays in view after use.
-  const jumpTimer = useRef<number | null>(null);
+  // Set by an in-page jump and cleared by the next scroll the user makes
+  // (wheel, touch or keys). A timer can't tell when a jump ends: Lenis eases
+  // out in sub-pixel steps, and its last 1px step would read as scrolling down.
+  const pinned = useRef(false);
 
   useMotionValueEvent(scrollY, 'change', (y) => {
     const previous = scrollY.getPrevious() ?? 0;
     setScrolled(y > 24);
-    if (jumpTimer.current !== null) {
-      window.clearTimeout(jumpTimer.current);
-      jumpTimer.current = window.setTimeout(() => (jumpTimer.current = null), 200);
-      return;
-    }
+    if (pinned.current) return;
     if (y > previous && y > window.innerHeight * 0.8) setHidden(true);
     else if (y < previous) setHidden(false);
   });
 
-  const pinForJump = () => {
-    if (jumpTimer.current !== null) window.clearTimeout(jumpTimer.current);
-    jumpTimer.current = window.setTimeout(() => (jumpTimer.current = null), 200);
-    setHidden(false);
-  };
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      if (!(event.target instanceof Element) || !event.target.closest('a[href^="#"]')) return;
+      pinned.current = true;
+      setHidden(false);
+    };
+    const release = () => {
+      pinned.current = false;
+    };
+    const onKey = (event: KeyboardEvent) => {
+      if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)) release();
+    };
+    document.addEventListener('click', onClick, true);
+    window.addEventListener('wheel', release, { passive: true });
+    window.addEventListener('touchmove', release, { passive: true });
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('click', onClick, true);
+      window.removeEventListener('wheel', release);
+      window.removeEventListener('touchmove', release);
+      window.removeEventListener('keydown', onKey);
+    };
+  }, []);
 
   const collapsed = hidden && !menuOpen && !focusWithin;
 
   return (
     <header
-      onClickCapture={(event) => {
-        if ((event.target as Element).closest('a[href^="#"]')) pinForJump();
-      }}
       onFocus={(event) => {
         // Only keyboard focus pins the navbar open; mouse clicks don't.
         if (event.target.matches(':focus-visible')) setFocusWithin(true);

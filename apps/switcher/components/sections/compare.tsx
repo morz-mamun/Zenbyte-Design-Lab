@@ -21,7 +21,7 @@ export function Compare() {
   const active = useActiveSection(rowIds);
 
   return (
-    <section id="compare" aria-labelledby="compare-title" className="border-t border-line py-24 sm:py-32">
+    <section id="compare" aria-labelledby="compare-title" className="section-pad border-t border-line">
       <div className="container-lab grid gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
         <div className="lg:sticky lg:top-[calc(var(--nav-h)+3rem)] lg:self-start">
           <SectionHeading index={3} eyebrow="Compare" title={compare.heading} titleId="compare-title" intro={compare.intro} />

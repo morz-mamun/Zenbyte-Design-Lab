@@ -77,11 +77,11 @@ const illustrations = [PickIllustration, BrowseIllustration, SwitchIllustration]
 
 export function Explore() {
   return (
-    <section id="explore" aria-labelledby="explore-title" className="border-t border-line py-24 sm:py-32">
+    <section id="explore" aria-labelledby="explore-title" className="section-pad border-t border-line">
       <div className="container-lab">
         <SectionHeading index={5} eyebrow="Explore" title={explore.heading} titleId="explore-title" />
 
-        <ScrollProgress label="Steps" className="mt-14 sm:mt-20" trackClassName="left-[5px]">
+        <ScrollProgress label="Steps" className="mt-10 sm:mt-14" trackClassName="left-[5px]">
           {explore.steps.map((step, index) => {
             const Illustration = illustrations[index];
             return (
