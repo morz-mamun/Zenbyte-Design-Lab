@@ -6,7 +6,7 @@ export const siteConfig = {
   description:
     'ZenByte embeds forward-deployed engineers inside your operation to deploy, integrate and adapt software to how your teams really work. A first version goes live in weeks, not quarters.',
   contact: {
-    email: 'services@zenbyte.com',
+    email: 'morzmamun@gmail.com',
   },
   links: {
     linkedin: 'https://www.linkedin.com/company/zenbyte-tech/',
