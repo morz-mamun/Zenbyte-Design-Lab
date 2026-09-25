@@ -17,6 +17,7 @@ function DesignCard({ design }: { design: Design }) {
   return (
     <a
       href={design.href}
+      data-cursor="Open"
       className="group/card relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-line bg-surface transition-colors duration-500 hover:border-line-strong focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
     >
       <div

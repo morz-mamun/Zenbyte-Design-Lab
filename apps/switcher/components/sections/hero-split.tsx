@@ -56,7 +56,8 @@ export function HeroSplit() {
       aria-hidden="true"
       onPointerMove={onMove}
       onPointerLeave={() => interactive && startSweep(split.get())}
-      className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] border border-line shadow-[0_40px_120px_-40px_rgb(0_0_0/0.6)] select-none sm:aspect-[16/9] sm:rounded-[1.75rem]"
+      data-cursor={interactive ? 'Drag' : undefined}
+      className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] border border-line shadow-[0_40px_120px_-40px_rgb(0_0_0/0.6)] select-none sm:aspect-[16/9] sm:rounded-[1.75rem] lg:aspect-[4/3]"
       style={{ cursor: interactive ? 'ew-resize' : undefined }}
     >
       <ClassicPreview className="absolute inset-0" />

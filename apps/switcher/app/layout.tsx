@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Anton, Geist, Instrument_Serif } from 'next/font/google';
 import './globals.css';
 
+import { Cursor } from '@/components/motion/cursor';
 import { MotionProvider } from '@/components/motion/motion-provider';
 import { SmoothScroll } from '@/components/motion/smooth-scroll';
 import { THEME_BG, THEME_STORAGE_KEY } from '@/lib/theme';
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <MotionProvider>
           <SmoothScroll />
           {children}
+          <Cursor />
         </MotionProvider>
       </body>
     </html>

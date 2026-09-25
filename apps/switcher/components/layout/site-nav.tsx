@@ -88,8 +88,8 @@ export function SiteNav() {
           aria-label={`${site.name}, back to top`}
           className={cn('relative z-[60] flex items-baseline gap-2 rounded-sm', focusRing)}
         >
-          <span className="text-sm font-bold tracking-[0.28em]">{site.wordmark}</span>
-          <span className="text-sm text-muted">Design Lab</span>
+          <span className="text-base font-bold tracking-[0.26em] sm:text-lg">{site.wordmark}</span>
+          <span className="text-base text-muted sm:text-lg">Design Lab</span>
         </a>
 
         <nav aria-label="Sections" className="hidden lg:block">
@@ -102,7 +102,7 @@ export function SiteNav() {
                     href={`#${section.id}`}
                     aria-current={current ? 'true' : undefined}
                     className={cn(
-                      'relative flex h-9 items-center rounded-full px-3.5 text-sm transition-colors',
+                      'relative flex h-10 items-center rounded-full px-3.5 text-[15px] transition-colors',
                       current ? 'text-fg' : 'text-muted hover:text-fg',
                       focusRing,
                     )}
@@ -138,7 +138,7 @@ export function SiteNav() {
           <a
             href="#designs"
             className={cn(
-              'group hidden h-11 items-center gap-2 rounded-full bg-accent pr-4 pl-5 text-sm font-medium text-on-accent transition-transform hover:scale-[1.03] sm:flex',
+              'group hidden h-11 items-center gap-2 rounded-full bg-accent pr-4 pl-5 text-[15px] font-medium text-on-accent transition-transform hover:scale-[1.03] sm:flex',
               focusRing,
             )}
           >
